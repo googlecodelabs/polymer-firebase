@@ -1,0 +1,31 @@
+body {
+  font-family: RobotoDraft, sans-serif;
+  color: #333;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+paper-button {
+  flex-shrink: 1;
+}
+paper-input {
+  flex-grow: 1;
+}
+
+paper-checkbox {
+  display: block;
+  margin: 5px 0;
+  transition: opacity 0.3s;
+}
+
+paper-checkbox[checked] {
+  opacity: 0.5;
+}
