@@ -16,8 +16,8 @@
     }.bind(this));
   };
 
-  app.addItem = function(ev) {
-    ev.preventDefault(); // Don't send the form!
+  app.addItem = function(event) {
+    event.preventDefault(); // Don't send the form!
     this.ref.push({
       done: false,
       text: app.newItemValue
@@ -25,12 +25,12 @@
     app.newItemValue = '';
   };
 
-  app.toggleItem = function(ev) {
-    this.ref.child(ev.model.item.uid).update({done: ev.model.item.done});
+  app.toggleItem = function(event) {
+    this.ref.child(event.model.item.uid).update({done: event.model.item.done});
   };
 
-  app.deleteItem = function(ev) {
-    this.ref.child(ev.model.item.uid).remove();
+  app.deleteItem = function(event) {
+    this.ref.child(event.model.item.uid).remove();
   };
 
   app.onFirebaseError = function(e) {
@@ -39,7 +39,9 @@
   };
   app.onFirebaseLogin = function(e) {
     this.ref = new Firebase(this.firebaseURL + '/user/' + e.detail.user.uid);
-    this.ref.on('value', this.updateItems.bind(this));
+    this.ref.on('value', function(snapshot) {
+      app.updateItems(snapshot);
+    });
   };
 
 })(document);

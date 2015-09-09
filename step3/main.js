@@ -16,11 +16,20 @@
     }
   ];
 
-  app.toggleItem = function(ev) {
-    ev.model.set('done', !ev.model.item.done);
+  app.addItem = function(event) {
+    event.preventDefault(); // Don't send the form!
+    this.push('items', {
+      done: false,
+      text: app.newItemValue
+    });
+    this.newItemValue = '';
   };
-  app.deleteItem = function(ev) {
-    this.splice('items', ev.model.index, 1);
+
+  app.toggleItem = function(event) {
+    event.model.set('done', !event.model.item.done);
+  };
+  app.deleteItem = function(event) {
+    this.splice('items', event.model.index, 1);
   };
 
   app.onFirebaseError = function(e) {
